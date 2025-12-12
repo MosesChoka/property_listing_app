@@ -1,0 +1,40 @@
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+  <%= form_with model: @property do |form| %>
+    <% if @property.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+        <ul>
+          <% @property.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field mb-3">
+      <%= form.label :title %>
+      <%= form.text_field :title, class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+    </div>
+    <div class="field mb-3">
+      <%= form.label :description %>
+      <%= form.text_area :description, class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+    </div>
+    <div class="field mb-3">
+      <%= form.label :price %>
+      <%= form.number_field :price, step: 1000, class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+    </div>
+    <div class="field mb-3">
+      <%= form.label :location %>
+      <%= form.text_field :location, class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+    </div>
+    <div class="field mb-3">
+      <%= form.label :property_type %>
+      <%= form.select :property_type, ['Apartment', 'House', 'Condo', 'Townhouse', 'Studio'], {}, class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+    </div>
+    <div class="field mb-3">
+      <%= form.label :images %>
+      <%= form.file_field :images, multiple: true, direct_upload: true, class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :properties
+  get "properties/new"
+  get "properties/edit"
+  get "properties/destroy"
   root "pages#index"
   get "/gallery", to: "pages#gallery"
   get "/projects", to:  "pages#project"
