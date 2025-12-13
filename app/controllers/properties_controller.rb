@@ -1,5 +1,8 @@
 class PropertiesController < ApplicationController
-  before_action :set_property, only: [:show, :edit, :update, :destroy]
+  before_action :set_property, only: [ :show, :edit, :update, :destroy ]
+  def index
+    @properties = Property.all
+  end
   def new
     @property = Property.new
   end
@@ -15,6 +18,7 @@ class PropertiesController < ApplicationController
     if @property.save
       redirect_to @property, notice: "Property was successfully created."
     else
+      puts @property.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,18 +34,16 @@ class PropertiesController < ApplicationController
 
   def destroy
     @property.destroy
-    redirect_to properties_url, notice: "Property was successfully destroyes."
+    redirect_to root_path, notice: "Property was successfully destroyed."
   end
 
   private
 
   def set_property
-    @property = Property.find(property_params[:id])
+    @property = Property.find(params[:id])
   end
 
-  def params
-    property_params.require(:property).permit(:title,:price,:location,:property_type,:description,images: [])  
+  def property_params
+    params.require(:property).permit(:title, :price, :location, :property_type, :description, images: [])
   end
-
-
 end
