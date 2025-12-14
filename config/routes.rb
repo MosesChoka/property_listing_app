@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :inquiries
+  get "inquiries/new"
+  get "inquiries/show"
+  get "inquiries/edit"
   resources :properties
   get "properties/new"
   get "properties/edit"

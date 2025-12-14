@@ -7,6 +7,8 @@ class PropertiesController < ApplicationController
     @property = Property.new
   end
 
+
+
   def show
   end
 

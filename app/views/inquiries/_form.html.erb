@@ -1,0 +1,28 @@
+<div class="max-w-md mx-auto md:mx-auto md:h-96 sm:max-w-fit bg-white p-6 rounded-lg shadow-md md:border-t-1 md:border-t-blue-700 mt-2 md:mt-5">
+  <%= form_with model: @inquiry, local: true do |form| %>
+    <% if @inquiry.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@inquiry.errors.count, "error") %> prohibited this enquiry form from being saved:</h2>
+        <ul>
+          <% @inquiry.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <div class="field mb-3">
+        <%= form.text_field :name, placeholder:"name", class:"border solid border-blue-400 p-3 rounded-sm bg-light"%>
+      </div>
+      <div class="field mb-3">
+        <%= form.text_field :phone, placeholder:"enter phone number", class:"border solid border-blue-400 p-3 rounded-sm bg-light"%>
+      </div>
+      <div class="field mb-3">
+        <%= form.text_area :message, placeholder:"message", class:"border solid border-blue-400 p-3 rounded-sm bg-light"%>
+      </div>
+    </div>
+    <div class="actions w-8 md:w-20 mt-4 py-3 md:py-2 border solid  rounded-md bg-blue-700 text-white text-center">
+      <%= form.submit "Send" %>
+    </div>
+  <% end %>
+</div>
