@@ -1,12 +1,12 @@
-<div class="max-w-7xl mx-auto px-4 pb-10">
-  <h1 class="text-2xl sm:text-3xl font-semibold mb-8 text-blue-600"> Our Beautiful Gallery</h1>
+<h1 class="text-2xl sm:text-3xl font-semibold mb-8 text-blue-600 text-center pt-4 sm:pt-8"> Our Beautiful Gallery</h1>
+<div class="max-w-7xl mx-auto px-4 pb-10 mb-50">
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
     <% @properties.each do |property| %>
       <% if property.images.attached? %>
         <% property.images.each do |image| %>
           <%= link_to property_path(property) do %>
             <div class="overflow-hidden rounded-lg border hover-shadow-lg transition">
-              <%= image_tag image.variant(resize_to_limit: [300,300]), class:"w-full h-48 object-cover hover:scale-105 transition-transform duration-300"%>
+              <%= image_tag image.variant(resize_to_limit: [600,600]), class:"w-full h-48 object-cover hover:scale-105 transition-transform duration-300"%>
             </div>
           <% end %>
         <% end %>
