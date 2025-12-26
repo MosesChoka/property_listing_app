@@ -1,4 +1,4 @@
-<div class="bg-gradient-to-b from-orange-50 to-blue-50 max-w-md mx-auto md:mx-auto md:h-96  sm:max-w-fit  p-6 rounded-lg shadow-xl md:border-t-1 md:border-t-blue-700 mt-2 md:mt-5">
+<div class="bg-gradient-to-b from-orange-50 to-blue-50 max-w-md mx-auto md:mx-auto lg:mx-20 md:h-96  sm:max-w-fit  p-6 rounded-lg shadow-xl md:border-t-1 md:border-t-blue-700 mt-2 md:mt-5">
   <%= form_with model: @property, local: true do |form| %>
     <% if @property.errors.any? %>
       <div id="error_explanation">
@@ -24,7 +24,13 @@
         <%= form.text_field :location, placeholder:"Location", class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
       </div>
       <div class="flex flex-col field mb-3">
-        <%= form.select :property_type, ['Apartment', 'House', 'Condo', 'Townhouse', 'Studio'], {}, placeholder:"Property type", class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+        <%= form.select :property_type, ['Apartment', 'House', 'Bedsitter','Studio'], {}, placeholder:"Property type", class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+      </div>
+      <div class="field mb-3">
+        <%= form.number_field :bedrooms, placeholder: "Bedrooms", class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
+      </div>
+      <div class="field mb-3">
+        <%= form.number_field :bathrooms, placeholder: "Bathrooms", class:"border solid border-blue-400 p-3 rounded-sm bg-light" %>
       </div>
       <div class="flex flex-col field mb-3 ">
         <%= form.label :images, class:"pb-1 md:pb-2 lg:hidden" %>

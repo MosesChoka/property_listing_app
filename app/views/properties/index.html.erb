@@ -1,6 +1,29 @@
 <div class="bg-sky-50 rounded-b-4xl shadow-md">
   <h1 class="text-2xl sm:text-3xl font-semibold mb-8 text-blue-600 text-center pt-18 pb-3 sm:pt-24"> Properties Listed </h1>
 </div>
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
+  <%= form_with url: properties_path, method: :get, local: true,
+              class: "grid grid-cols-1 md:grid-cols-5 gap-4 mb-6" do %>
+    <%= text_field_tag :location, params[:location],
+      placeholder: "Location",
+      class: "border rounded p-2" %>
+    <%= select_tag :property_type,
+      options_for_select(
+        ["Apartment", "Bedsitter", "Maisonette"],
+        params[:property_type]
+      ),
+      include_blank: "House type",
+      class: "border rounded p-2" %>
+    <%= number_field_tag :min_price, params[:min_price],
+      placeholder: "Min price",
+      class: "border rounded p-2" %>
+    <%= number_field_tag :max_price, params[:max_price],
+      placeholder: "Max price",
+      class: "border rounded p-2" %>
+    <%= submit_tag "Search",
+      class: "bg-blue-600 text-white rounded px-4 py-2" %>
+  <% end %>
+</div>
 <div class="max-w-7xl mx-auto px-4 pb-10 mb-50">
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
     <% @properties.each do |property| %>

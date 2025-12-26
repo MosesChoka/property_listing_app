@@ -2,6 +2,10 @@ class PropertiesController < ApplicationController
   before_action :set_property, only: [ :show, :edit, :update, :destroy ]
   def index
     @properties = Property.all
+    .by_location(params[:location])
+    .by_property_type(params[:property_type])
+    .by_min_price(params[:min_price])
+    .by_max_price(params[:max_price])
   end
   def new
     @property = Property.new
@@ -46,6 +50,6 @@ class PropertiesController < ApplicationController
   end
 
   def property_params
-    params.require(:property).permit(:title, :price, :location, :property_type, :description, images: [])
+    params.require(:property).permit(:title, :price, :location, :property_type, :bedrooms, :bathrooms, :description, images: [])
   end
 end
