@@ -2,7 +2,7 @@
   <h1 class="text-2xl sm:text-3xl font-semibold mb-8 text-blue-600 text-center pt-18 pb-3 sm:pt-24"> Properties Listed </h1>
 </div>
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
-  <%= form_with url: properties_path, method: :get, local: true,
+  <%= form_with url: properties_path, method: :get, data: {turbo_frame: "properties", controller: "filter"}, local: true,
               class: "grid grid-cols-1 md:grid-cols-5 gap-4 mb-6" do %>
     <%= text_field_tag :location, params[:location],
       placeholder: "Location",
@@ -14,7 +14,7 @@
       ),
       include_blank: "House type",
       class: "border rounded p-2" %>
-    <%= select_tag :price_range, 
+    <%= select_tag :price_range,
       options_for_select([
         ["Choose price range", ""],
         ["Under 5000", "100-5000"],
@@ -23,26 +23,27 @@
         ["10k - 15k", "10000-15000"],
         ["15k - 20k", "15000-20000"],
         ["20k and above", "20000-1000000"]
-      ], 
-      params[:price_range]
-    ),
-    class: "border rounded p-2"%>
+      ], params[:price_range]),
+      data: { action: "change->filter#submit" },
+      class: "border rounded p-2" %>
     <%= submit_tag "Search",
       class: "bg-blue-600 text-white rounded px-4 py-2" %>
   <% end %>
 </div>
 <div class="max-w-7xl mx-auto px-4 pb-10 mb-50">
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-    <% @properties.each do |property| %>
-      <% if property.images.attached? %>
-        <% property.images.each do |image| %>
-          <%= link_to property_path(property) do %>
-            <div class="overflow-hidden rounded-lg border hover-shadow-lg transition">
-              <%= image_tag image.variant(resize_to_limit: [600,600]), class:"w-full h-48 object-cover hover:scale-105 transition-transform duration-300"%>
-            </div>
+  <turbo-frame id="properties">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <% @properties.each do |property| %>
+        <% if property.images.attached? %>
+          <% property.images.each do |image| %>
+            <%= link_to property_path(property), data:{turbo: false} do %>
+              <div class="overflow-hidden rounded-lg border hover-shadow-lg transition">
+                <%= image_tag image.variant(resize_to_limit: [600,600]), class:"w-full h-48 object-cover hover:scale-105 transition-transform duration-300"%>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  </turbo-frame>
 </div>
