@@ -4,8 +4,7 @@ class PropertiesController < ApplicationController
     @properties = Property.all
     .by_location(params[:location])
     .by_property_type(params[:property_type])
-    .by_min_price(params[:min_price])
-    .by_max_price(params[:max_price])
+    .by_price_range(params[:price_range])
   end
   def new
     @property = Property.new

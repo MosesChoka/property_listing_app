@@ -13,11 +13,15 @@ class Property < ApplicationRecord
     where(property_type: property_type) if property_type.present?
   }
 
-  scope :by_min_price, ->(min_price) {
-    where("price >= ?", min_price.to_i) if min_price.present?
-  }
+  scope :by_price_range, ->(range) {
+    return if range.blank?
 
-  scope :by_max_price, ->(max_price) {
-    where("price <= ?", max_price.to_i) if max_price.present?
+    min, max = range.split("-")
+
+    if max.present?
+      where("price BETWEEN ? AND ?", min.to_i, max.to_i)
+    else
+      where("price >= ?", min.to_i)
+    end
   }
 end

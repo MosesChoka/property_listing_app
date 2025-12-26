@@ -7,19 +7,26 @@
     <%= text_field_tag :location, params[:location],
       placeholder: "Location",
       class: "border rounded p-2" %>
-    <%= select_tag :property_type,
+    <%= select_tag :house_type,
       options_for_select(
         ["Apartment", "Bedsitter", "Maisonette"],
-        params[:property_type]
+        params[:house_type]
       ),
       include_blank: "House type",
       class: "border rounded p-2" %>
-    <%= number_field_tag :min_price, params[:min_price],
-      placeholder: "Min price",
-      class: "border rounded p-2" %>
-    <%= number_field_tag :max_price, params[:max_price],
-      placeholder: "Max price",
-      class: "border rounded p-2" %>
+    <%= select_tag :price_range, 
+      options_for_select([
+        ["Choose price range", ""],
+        ["Under 5000", "100-5000"],
+        ["5k - 7k", "5000-7000"],
+        ["7k - 10k", "7000-10000"],
+        ["10k - 15k", "10000-15000"],
+        ["15k - 20k", "15000-20000"],
+        ["20k and above", "20000-1000000"]
+      ], 
+      params[:price_range]
+    ),
+    class: "border rounded p-2"%>
     <%= submit_tag "Search",
       class: "bg-blue-600 text-white rounded px-4 py-2" %>
   <% end %>
