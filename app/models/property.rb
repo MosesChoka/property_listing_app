@@ -2,19 +2,22 @@ class Property < ApplicationRecord
   belongs_to :user
   has_many_attached :images
 
+
+  enum :status, { pending: 0, approved: 1 }
+
   validates :title, :price, :location, :property_type, :bedrooms, :bathrooms, :description, presence: true
   validates :price, :bedrooms, :bathrooms, numericality: { greater_than: -1 }, allow_nil: true
 
   scope :by_location, ->(location) {
-    where("location ILIKE ?", "%#{location}%") if location.present?
+    location.present? ? where("location ILIKE ?", "%#{location}%") : all
   }
 
   scope :by_property_type, ->(property_type) {
-    where(property_type: property_type) if property_type.present?
+    property_type.present? ? where(property_type: property_type) : all
   }
 
   scope :by_price_range, ->(range) {
-    return if range.blank?
+    return all if range.blank?
 
     min, max = range.split("-")
 
@@ -24,4 +27,6 @@ class Property < ApplicationRecord
       where("price >= ?", min.to_i)
     end
   }
+
+  scope :approved, -> { where(status: :approved) }
 end

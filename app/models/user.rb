@@ -6,4 +6,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   rolify
+
+  def admin?
+    has_role?(:admin)
+  end
+
+  def landlord?
+    has_role?(:landlord)
+  end
 end

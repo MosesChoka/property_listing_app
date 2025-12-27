@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/gallery", to: "pages#gallery"
   get "/projects", to:  "pages#project"
   get "/contact", to: "pages#contact"
+  resource :landlord_role, only: [ :create ]
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -24,4 +25,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  namespace :admin do
+    resources :properties do
+      member do
+        patch :approve
+      end
+    end
+  end
 end

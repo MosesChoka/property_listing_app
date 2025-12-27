@@ -24,8 +24,11 @@ gem "jbuilder"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
-# Use Rolify for role management 
+# Use Rolify for role management
 gem "rolify", "~> 6.0"
+
+# Use CanCanCan to create abilities for the defined role
+gem "cancancan"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 

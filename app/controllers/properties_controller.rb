@@ -1,7 +1,8 @@
 class PropertiesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_property, only: [ :show, :edit, :update, :destroy ]
   def index
-    @properties = Property.all
+    @properties = Property.approved
     .by_location(params[:location])
     .by_property_type(params[:property_type])
     .by_price_range(params[:price_range])
@@ -20,6 +21,9 @@ class PropertiesController < ApplicationController
 
   def create
     @property = current_user.properties.build(property_params)
+
+    @property.status = current_user.has_role?(:admin) ? :approved : :pending
+
     if @property.save
       redirect_to @property, notice: "Property was successfully created."
     else
