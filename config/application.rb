@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require 'factory_bot_rails'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +24,10 @@ module Baiti
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # configure Rails model generator to use FactoryBot to create factory stubs when new models are created
+    config.generators do |g|
+      g.test_framework :rspec, fixtur: true
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+    end
   end
 end
