@@ -1,6 +1,7 @@
 class PropertiesController < ApplicationController
   load_and_authorize_resource
   before_action :set_property, only: [ :show, :edit, :update, :destroy ]
+
   def index
     @properties = Property.approved
     .by_location(params[:location])
@@ -49,8 +50,10 @@ class PropertiesController < ApplicationController
   private
 
   def set_property
-    @property = Property.find(params[:id])
+    @property = Property.find_by(slug: params[:id])
   end
+
+
 
   def property_params
     params.require(:property).permit(:title, :price, :location, :property_type, :bedrooms, :bathrooms, :description, images: [])

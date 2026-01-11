@@ -47,6 +47,10 @@
     </div>
   </turbo-frame>
 </div>
-<% unless current_user.landlord? || current_user.admin? %>
-  <%= button_to "Create Landlord Account", landlord_role_path, method: :post, class:"btn btn-primary"%>
-<% end %>
+<div class="flex lg:justify-end lg:pr-84">
+  <div class="ml-4 bg-orange-50 border border-neutral-900 rounded-2xl py-2 px-8 mb-2 w-50 text-blue-500 hover cursor-pointer">
+    <% unless current_user.landlord? || current_user.admin? %>
+      <%= button_to "Create Landlord Account", landlord_role_path, method: :post, class:"btn btn-primary cursor-pointer"%>
+    <% end %>
+  </div>
+</div>
