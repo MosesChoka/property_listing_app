@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "inquiries/new"
   get "inquiries/show"
   get "inquiries/edit"
-  resources :properties
+  resources :properties, param: :slug
   get "properties/new"
   get "properties/edit"
   get "properties/destroy"

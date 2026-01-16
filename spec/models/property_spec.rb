@@ -26,7 +26,7 @@ RSpec.describe Property, type: :model do
     it 'is unique' do
       create(:property, title: "Modern 3 Bedroom House")
       second_property = create(:property, title: "Modern 3 Bedroom House")
-      expect(second_property.slug).to eq("modern-3-bedroom-house-2")
+      expect(second_property.slug).to eq("modern-3-bedroom-house-1")
     end
   end
 

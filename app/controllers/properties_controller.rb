@@ -50,7 +50,7 @@ class PropertiesController < ApplicationController
   private
 
   def set_property
-    @property = Property.find_by(slug: params[:id])
+    @property = Property.find_by(slug: params[:slug])
   end
 
 
