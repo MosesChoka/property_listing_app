@@ -7,10 +7,10 @@
     <%= text_field_tag :location, params[:location],
       placeholder: "Location",
       class: "border rounded p-2" %>
-    <%= select_tag :house_type,
+    <%= select_tag :property_type,
       options_for_select(
-        ["Apartment", "Bedsitter", "Maisonette"],
-        params[:house_type]
+        ['Apartment', 'House', 'Bedsitter','Studio'],
+        params[:property_type]
       ),
       include_blank: "House type",
       class: "border rounded p-2" %>
@@ -27,7 +27,7 @@
       data: { action: "change->filter#submit" },
       class: "border rounded p-2" %>
     <%= submit_tag "Search",
-      class: "bg-blue-600 text-white rounded px-4 py-2" %>
+      class: "bg-blue-600 text-white rounded px-4 py-2 cursor-pointer" %>
   <% end %>
 </div>
 <div class="max-w-7xl mx-auto px-4 pb-10">
